@@ -1,18 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import NewTast from './NewTask';
+import TaskArr from './TaskArr';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      input: '',
+      arr: []
+    }
+    this.updateInput = this.updateInput.bind(this);
+    this.addTask = this.addTask.bind(this);
+
+  }
+
+  updateInput(e) {
+    this.setState({
+      input: e.target.value
+    })
+  }
+
+  addTask(val){
+    let {arr} = this.state;
+    arr.push(val);
+    
+    this.setState({
+      arr: arr
+    })
+  }
+
+
+
+
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Hello Dennis, add some task please</h1>
+        <input onChange={(e) => this.updateInput(e)} />
+        
+        <NewTast 
+        input = {this.state.input}
+        arr = {this.state.arr}
+        />
+        <TaskArr 
+        tastArr = {this.state.arr}
+        />
       </div>
     );
   }

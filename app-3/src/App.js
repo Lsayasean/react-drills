@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      input: '',
+      arr: ['ice', 'dennis', 'cream', 'cat'],
+      filteredArray: []
+    }
+  }
+
+  updateInput(e) {
+    this.setState({
+      input: e.target.value
+    })
+  }
+
   render() {
+    const { arr, input} = this.state;
+
+    let newArr = arr.filter((ele)=>{
+      return ele.includes(input)
+    })
+    .map((ele, i) => { // needs map to show each element of the array
+      return (
+        <h2 key ={i}>{ele}</h2>
+      )
+    })
+
+    // console.log(newArr)
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        Hello world
+        <input onChange={(e) => this.updateInput(e)} />
+        <h2>{newArr}</h2>
       </div>
     );
   }
